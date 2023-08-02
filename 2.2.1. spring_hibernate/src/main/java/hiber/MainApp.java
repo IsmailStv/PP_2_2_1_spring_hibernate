@@ -6,13 +6,11 @@ import hiber.model.User;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-
-import javax.persistence.NoResultException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class MainApp {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
@@ -48,16 +46,8 @@ public class MainApp {
         }
 
         // 2. Выбрать пользователя, владеющего машиной (по ее модели и серии)
-        System.out.println(userService.getUserByCar("Model1", 001));
+        System.out.println(userService.getUserByCar("Model2", 010));
         System.out.println("2. _____________________________________________");
-
-        // Нет пользователя с такой машиной
-        try {
-            User notFoundUser = userService.getUserByCar("Model5", 111);
-        } catch (NoResultException e) {
-            System.out.println("User not found");
-            System.out.println("3. _____________________________________________");
-        }
 
         context.close();
     }
